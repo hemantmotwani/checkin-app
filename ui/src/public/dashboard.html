@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check-In Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding: 20px; }
+    .table { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Check-In Dashboard</h1>
+    <!-- Search Bar -->
+    <div class="mb-3">
+      <input type="text" id="search-input" class="form-control" placeholder="Search by client name or ID">
+    </div>
+    <!-- Check-In Table -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Client ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Postal</th>
+          <th>Phone Number</th>
+          <th>Email</th>
+          <th>Check-In Time</th>
+        </tr>
+      </thead>
+      <tbody id="checkins">
+        <!-- Check-ins will be populated here -->
+      </tbody>
+    </table>
+  </div>
+  <script>
+    // Fetch check-ins from the backend
+    const fetchCheckIns = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/dashboard');
+        const checkins = await response.json();
+        const tableBody = document.getElementById('checkins');
+        tableBody.innerHTML = checkins.map(checkin => `
+          <tr>
+            <td>${checkin.clientId}</td>
+            <td>${checkin.clientFirstName}</td>
+            <td>${checkin.clientLastName}</td>
+            <td>${checkin.clientAddress}</td>
+            <td>${checkin.clientCity}</td>
+            <td>${checkin.clientState}</td>
+            <td>${checkin.clientPostal}</td>
+            <td>${checkin.clientPhone}</td>
+            <td>${checkin.clientEmail}</td>
+            <td>${checkin.checkInTime}</td>
+          </tr>
+        `).join('');
+      } catch (error) {
+        console.error('Error fetching check-ins:', error);
+      }
+    };
+
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const rows = document.querySelectorAll('#checkins tr');
+      rows.forEach(row => {
+        const clientId = row.cells[0].textContent.toLowerCase();
+        const clientName = row.cells[1].textContent.toLowerCase();
+        if (clientId.includes(searchTerm) || clientName.includes(searchTerm)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+
+    // Fetch check-ins on page load
+    fetchCheckIns();
+
+    // Refresh the dashboard every 5 seconds
+    setInterval(fetchCheckIns, 5000);
+  </script>
+</body>
+</html>
