@@ -24,7 +24,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "ui/src/$1"
+        "dest": "ui/src/public/$1"
       }
     ]
   }
