@@ -1,7 +1,7 @@
 {
     "version": 2,
     "env": {
-        "VITE_BACKEND_URL": "https://checkin-app.vercel.app"
+        "VITE_BACKEND_URL": "https://checkin-app-six.vercel.app/"
     },
     "builds": [
       {

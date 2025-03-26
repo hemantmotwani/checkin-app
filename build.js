@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Get the backend URL from environment variables or use default
-const backendUrl = process.env.VITE_BACKEND_URL || 'https://checkin-app.vercel.app';
+const backendUrl = process.env.VITE_BACKEND_URL || 'https://checkin-app-six.vercel.app/';
 
 console.log(`Building with backend URL: ${backendUrl}`);
 
