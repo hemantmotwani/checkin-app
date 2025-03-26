@@ -1,0 +1,30 @@
+{
+    "version": 2,
+    "env": {
+        "VITE_BACKEND_URL": "https://checkin-app.vercel.app"
+    },
+    "builds": [
+      {
+        "src": "ui/src/**/*",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "service/src/index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/checkin",
+        "dest": "service/src/index.js"
+      },
+      {
+        "src": "/dashboard",
+        "dest": "service/src/index.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "ui/src/$1"
+      }
+    ]
+  }
