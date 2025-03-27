@@ -1,12 +1,39 @@
-const express = require('express');
-const admin = require('firebase-admin');
-const cors = require('cors');
+import express from 'express';
+import admin from 'firebase-admin';
+import cors from 'cors';
 
-// Initialize Firebase
-const serviceAccount = require('../resources/serviceAccountKey.json');
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+import * as dotenv from 'dotenv'
+dotenv.config();
+
+import firebaseAdmin from "firebase-admin";
+
+const serviceAccount = {
+  type: "service_account",
+  project_id: process.env.FIREBASE_PROJECT_ID,
+  private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+  private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'), // Fixes newlines
+  client_email: process.env.FIREBASE_CLIENT_EMAIL,
+  client_id: process.env.FIREBASE_CLIENT_ID,
+  auth_uri: process.env.FIREBASE_AUTH_URI,
+  token_uri: process.env.FIREBASE_TOKEN_URI,
+  auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_CERT_URL,
+  client_x509_cert_url: process.env.FIREBASE_CLIENT_CERT_URL,
+};
+
+if (!firebaseAdmin.apps.length) {
+  firebaseAdmin.initializeApp({
+    credential: firebaseAdmin.credential.cert(serviceAccount),
+  });
+}
+
+export default firebaseAdmin;
+
+
+// // Initialize Firebase
+// const serviceAccount = require('../resources/serviceAccountKey.json');
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+// });
 
 const db = admin.firestore();
 const app = express();
@@ -24,12 +51,14 @@ app.post('/checkin', async (req, res) => {
       return res.status(404).json({ message: 'Client not found.' });
     }
     const client_checkin_data = {
+      checkin_Id: qrData + Date.now(),
       client_Id: qrData,
       ltf_Id: qrData,
       checkin_time: Date.now()
     };
+    console.log(client_checkin_data);
     // Add the check-in to the checkins collection
-    await db.collection('Client_CheckIns').doc(client_checkin_data.client_Id).set(client_checkin_data);
+    await db.collection('Client_CheckIns').doc(client_checkin_data.checkin_Id).set(client_checkin_data);
     res.json({ message: `Client ${qrData} checked in successfully.` });
   } catch (error) {
     console.error("Error checking in client:", error);
@@ -63,7 +92,16 @@ app.get('/dashboard', async (req, res) => {
           clientPostal: clientDoc.data().postal,
           clientPhone: clientDoc.data().phone,
           clientEmail: clientDoc.data().email,
-          checkInTime: checkinData.checkin_time.toDate().toLocaleString('en-US', { timeZone: 'America/Chicago' })
+          checkInTime: new Intl.DateTimeFormat('en-US', {
+            timeZone: 'America/Chicago', // Chicago timezone
+            month: 'numeric', // month as number (e.g., 3)
+            day: 'numeric', // day as number (e.g., 26)
+            year: 'numeric', // year as number (e.g., 2025)
+            hour: '2-digit', // hour with 2 digits (e.g., 5)
+            minute: '2-digit', // minute with 2 digits (e.g., 30)
+            second: '2-digit', // second with 2 digits (e.g., 15)
+            hour12: true, // 12-hour format (AM/PM)
+          }).format(new Date(checkinData.checkin_time))
         });
       }
     }

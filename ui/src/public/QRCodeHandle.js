@@ -2,23 +2,13 @@ const scanner = new Html5QrcodeScanner('qr-reader', {
   qrbox: 250,
   fps: 10,
 });
+import { backendUrl } from './Util.js'; // Import the backend URL
 
 // Function to handle QR code data
 const handleQRCodeData = (qrCodeData) => {
   document.getElementById('result').innerText = `Scanned: ${qrCodeData}`;
   
-  // Send data to the backend
-  let backendUrl;
-  try {
-    // Try to get the URL from Vite's define replacement
-    backendUrl = __VITE_BACKEND_URL__;
-    console.log('Using Vite backend URL:', backendUrl);
-  } catch (e) {
-    // Fallback for production or if define replacement fails
-    console.log('Vite backend URL not available, using fallback');
-    backendUrl = 'http://localhost:3000';
-  }
-  
+
   fetch(`${backendUrl}/checkin`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
