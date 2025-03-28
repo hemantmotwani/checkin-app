@@ -7,7 +7,8 @@
     "build": "node build.js",
     "dev:ui": "cd ui && npm run dev",
     "dev:service": "cd service && node src/index.js",
-    "dev": "concurrently \"npm run dev:ui\" \"npm run dev:service\""
+    "dev": "concurrently \"npm run dev:ui\" \"npm run dev:service\"",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",

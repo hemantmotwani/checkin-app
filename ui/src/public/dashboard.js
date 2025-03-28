@@ -3,7 +3,6 @@ import { backendUrl } from './Util.js'; // Import the backend URL
 
 const fetchCheckIns = async () => {
     try {
-    //   const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3000'; 
       const response = await fetch(`${backendUrl}/dashboard`);
       const checkins = await response.json();
       const tableBody = document.getElementById('checkins');
