@@ -1,45 +1,12 @@
 {
     "version": 2,
-    "env": {
-        "VITE_BACKEND_URL": "https://checkin-app-five.vercel.app/"
-    },
-    "builds": [
-      {
-        "src": "ui/package.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "dist"
-        }
-      },
-      {
-        "src": "service/src/index.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/checkin",
-        "dest": "service/src/index.js"
-      },
-      {
-        "src": "/dashboard",
-        "dest": "service/src/index.js"
-      },
-      {
-        "src": "/assets/(.*)",
-        "dest": "/assets/$1"
-      },
-      {
-        "src": "/(.*\\.(js|css|ico|png|jpg|jpeg|svg|json))",
-        "dest": "/$1"
-      },
-      {
-        "src": "/dashboard.html",
-        "dest": "/dashboard.html"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
-      }
+    "outputDirectory": "dist",
+    "rewrites": [
+      { "source": "/api/(.*)", "destination": "/service/src/index.js" },
+      { "source": "/checkin", "destination": "/service/src/index.js" },
+      { "source": "/dashboard", "destination": "/service/src/index.js" },
+      { "source": "/dashboard.html", "destination": "/dashboard.html" },
+      { "source": "/assets/(.*)", "destination": "/assets/$1" },
+      { "source": "/(.*)", "destination": "/index.html" }
     ]
   }

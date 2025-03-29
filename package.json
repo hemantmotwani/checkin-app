@@ -2,14 +2,14 @@
   "name": "checkin-app",
   "version": "1.0.0",
   "description": "A QR code based check-in system for nonprofit organizations.",
+  "type": "module",
   "main": "build.js",
   "scripts": {
     "build": "node build.js",
     "dev:ui": "cd ui && npm run dev",
     "dev:service": "cd service && node src/index.js",
     "dev": "concurrently \"npm run dev:ui\" \"npm run dev:service\"",
-    "start": "node server.js",
-    "vercel-build": "cd ui && npm install && npm run build"
+    "start": "node service/src/index.js"
   },
   "keywords": [],
   "author": "",
