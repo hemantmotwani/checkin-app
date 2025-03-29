@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "cd ui && npm install && npm run build",
+    "postbuild": "ls -R ui/dist || echo 'ERROR: ui/dist not found!'",
     "dev:ui": "cd ui && npm run dev",
     "dev:service": "cd service && node src/index.js",
     "dev": "concurrently \"npm run dev:ui\" \"npm run dev:service\"",
