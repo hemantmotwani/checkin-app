@@ -1,12 +1,12 @@
 import { backendUrl } from './Util.js'; // Import the backend URL
-import { Html5QrcodeScanner } from 'html5-qrcode';
+// import { Html5QrcodeScanner } from 'html5-qrcode';
 
 console.log("VITE_BACKEND_URL:", import.meta.env.VITE_BACKEND_URL);
 
-const scanner = new Html5QrcodeScanner('qr-reader', {
-  qrbox: 250,
-  fps: 10,
-});
+// const scanner = new Html5QrcodeScanner('qr-reader', {
+//   qrbox: 250,
+//   fps: 10,
+// });
 
 // Function to handle QR code data
 const handleQRCodeData = (qrCodeData) => {
