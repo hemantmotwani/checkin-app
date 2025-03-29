@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cd ui && npm install && npm run build && cd .. && mkdir -p dist && cp -r ui/dist dist",
     "vercel-build": "npm run build",
-    "postbuild": "ls -R ui/dist || echo 'ERROR: ui/dist not found!'",
+    "postbuild": "ls -R dist || echo 'ERROR: ui/dist not found!'",
     "dev:ui": "cd ui && npm run dev",
     "dev:service": "cd service && node src/index.js",
     "dev": "concurrently \"npm run dev:ui\" \"npm run dev:service\"",
