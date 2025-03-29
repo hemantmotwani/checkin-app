@@ -5,7 +5,7 @@
         "src": "ui/package.json",
         "use": "@vercel/static-build",
         "config": {
-          "distDir": "dist"
+          "distDir": "ui/dist"
         }
       },
       {
@@ -24,19 +24,15 @@
       },
       {
         "src": "/assets/(.*)",
-        "dest": "/assets/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/ui/$1"
+        "dest": "/ui/dist/assets/$1"
       },
       {
         "src": "/dashboard.html",
-        "dest": "/dashboard.html"
+        "dest": "/ui/dist/dashboard.html"
       },
       {
         "src": "/(.*)",
-        "dest": "/index.html"
+        "dest": "/ui/dist/index.html"
       }
     ]
   }
