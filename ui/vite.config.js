@@ -7,6 +7,7 @@ export default defineConfig({
   // No need for manual 'define' if using VITE_* variables
   build: {
     outDir: 'dist',
+    assetsDir: 'assets',
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
@@ -15,5 +16,8 @@ export default defineConfig({
     }
   },
   publicDir: 'public',
-  base: '/'
+  base: '/',
+  server: {
+    port: 5173
+  }
 });

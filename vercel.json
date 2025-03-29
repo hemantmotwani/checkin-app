@@ -1,12 +1,42 @@
 {
     "version": 2,
-    "outputDirectory": "dist",
-    "rewrites": [
-      { "source": "/api/(.*)", "destination": "/service/src/index.js" },
-      { "source": "/checkin", "destination": "/service/src/index.js" },
-      { "source": "/dashboard", "destination": "/service/src/index.js" },
-      { "source": "/dashboard.html", "destination": "/dashboard.html" },
-      { "source": "/assets/(.*)", "destination": "/assets/$1" },
-      { "source": "/(.*)", "destination": "/index.html" }
+    "builds": [
+      {
+        "src": "ui/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "dist"
+        }
+      },
+      {
+        "src": "service/src/index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "service/src/index.js"
+      },
+      {
+        "src": "/checkin",
+        "dest": "service/src/index.js"
+      },
+      {
+        "src": "/dashboard",
+        "dest": "service/src/index.js"
+      },
+      {
+        "src": "/assets/(.*)",
+        "dest": "/assets/$1"
+      },
+      {
+        "src": "/dashboard.html",
+        "dest": "/dashboard.html"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
     ]
   }
