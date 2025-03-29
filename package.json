@@ -4,7 +4,8 @@
   "description": "A QR code based check-in system for nonprofit organizations.",
   "type": "module",
   "scripts": {
-    "build": "cd ui && npm install && npm run build && cd .. && cp -r ui/dist dist",
+    "build": "cd ui && npm install && npm run build && cd .. && mpdir -p dist && cp -r ui/dist dist",
+    "vercel-build": "npm run build",
     "postbuild": "ls -R ui/dist || echo 'ERROR: ui/dist not found!'",
     "dev:ui": "cd ui && npm run dev",
     "dev:service": "cd service && node src/index.js",
