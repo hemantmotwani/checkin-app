@@ -1,12 +1,5 @@
 import { backendUrl } from './Util.js'; // Import the backend URL
-// import { Html5QrcodeScanner } from 'html5-qrcode';
 
-console.log("VITE_BACKEND_URL:", import.meta.env.VITE_BACKEND_URL);
-
-// const scanner = new Html5QrcodeScanner('qr-reader', {
-//   qrbox: 250,
-//   fps: 10,
-// });
 
 // Function to handle QR code data
 const handleQRCodeData = (qrCodeData) => {
@@ -22,10 +15,6 @@ const handleQRCodeData = (qrCodeData) => {
   .catch(error => console.error(error));
 };
 
-// Render the QR code scanner (hidden for PC testing)
-scanner.render((qrCodeData) => {
-  handleQRCodeData(qrCodeData);
-});
 
 // Manual QR code entry
 document.getElementById('manual-submit-btn').addEventListener('click', () => {

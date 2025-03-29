@@ -3,7 +3,11 @@
     "builds": [
       {
         "src": "ui/package.json",
-        "use": "@vercel/static-build"
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "ui/dist",
+          "outputDirectory": "ui/dist"
+        }
       },
       {
         "src": "service/src/index.js",
