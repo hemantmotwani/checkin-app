@@ -8,7 +8,7 @@
         "src": "ui/package.json",
         "use": "@vercel/static-build",
         "config": {
-          "distDir": "ui/dist"
+          "distDir": "dist"
         }
       },
       {
