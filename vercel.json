@@ -5,8 +5,11 @@
     },
     "builds": [
       {
-        "src": "ui/**/*",
-        "use": "@vercel/static"
+        "src": "ui/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "dist"
+        }
       },
       {
         "src": "service/src/index.js",
@@ -23,8 +26,20 @@
         "dest": "service/src/index.js"
       },
       {
+        "src": "/assets/(.*)",
+        "dest": "ui/dist/assets/$1"
+      },
+      {
+        "src": "/(.*\\.(js|css|ico|png|jpg|jpeg|svg|json))",
+        "dest": "ui/dist/$1"
+      },
+      {
+        "src": "/dashboard.html",
+        "dest": "ui/dist/dashboard.html"
+      },
+      {
         "src": "/(.*)",
-        "dest": "ui/$1"
+        "dest": "ui/dist/index.html"
       }
     ]
   }
