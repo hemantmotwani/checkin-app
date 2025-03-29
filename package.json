@@ -8,7 +8,8 @@
     "dev:ui": "cd ui && npm run dev",
     "dev:service": "cd service && node src/index.js",
     "dev": "concurrently \"npm run dev:ui\" \"npm run dev:service\"",
-    "start": "node server.js"
+    "start": "node server.js",
+    "vercel-build": "cd ui && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
