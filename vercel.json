@@ -15,10 +15,6 @@
     ],
     "routes": [
       {
-        "src": "/api/(.*)",
-        "dest": "service/src/index.js"
-      },
-      {
         "src": "/checkin",
         "dest": "service/src/index.js"
       },
@@ -31,8 +27,8 @@
         "dest": "/assets/$1"
       },
       {
-        "src": "/src/(.*)",
-        "dest": "/src/$1"
+        "src": "/(.*)",
+        "dest": "/ui/$1"
       },
       {
         "src": "/dashboard.html",
