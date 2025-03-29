@@ -2,6 +2,8 @@ const scanner = new Html5QrcodeScanner('qr-reader', {
   qrbox: 250,
   fps: 10,
 });
+	console.log("VITE_BACKEND_URL:", import.meta.env.VITE_BACKEND_URL);
+
 import { backendUrl } from './Util.js'; // Import the backend URL
 
 // Function to handle QR code data

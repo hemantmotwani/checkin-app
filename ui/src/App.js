@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+	console.log("VITE_BACKEND_URL:", import.meta.env.VITE_BACKEND_URL);
   return (
     <div className="App">
       <header className="App-header">

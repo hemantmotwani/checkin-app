@@ -115,5 +115,6 @@ app.get('/dashboard', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
+  process.env.NODE_ENV === 'production' ? console.log(`Server running on https://checkin-app-five.vercel.app`) : console.log(`Server running on http://localhost:${PORT}`);
   console.log(`Server running on http://localhost:${PORT}`);
 });
