@@ -10,8 +10,8 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        dashboard: resolve(__dirname, 'dashboard.html')
+        QRCodeHandle: resolve(__dirname, 'src/QRCodeHandle.js'),
+        dashboard: resolve(__dirname, 'src/dashboard.js')
       }
     }
   },
