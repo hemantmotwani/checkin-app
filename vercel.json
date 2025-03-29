@@ -5,33 +5,26 @@
     },
     "builds": [
       {
-        "src": "ui/package.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "dist"
-        }
+        "src": "ui/**/*",
+        "use": "@vercel/static"
       },
       {
         "src": "service/src/index.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "server.js",
         "use": "@vercel/node"
       }
     ],
     "routes": [
       {
-        "src": "/api/(.*)",
+        "src": "/checkin",
         "dest": "service/src/index.js"
       },
       {
-        "src": "/(.*\\.(js|css|png|jpg|jpeg|svg|ico|json))",
-        "dest": "ui/dist/$1"
+        "src": "/dashboard",
+        "dest": "service/src/index.js"
       },
       {
         "src": "/(.*)",
-        "dest": "server.js"
+        "dest": "ui/$1"
       }
     ]
   }
